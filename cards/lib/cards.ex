@@ -7,11 +7,19 @@ defmodule Cards do
     values = ["Ace", "Two", "Three", "Four", "Five"]
     suits = ["Spades", "Clubs", "Hearts", "Diamonds"]
 
-    # Make a combination oof [(value,suits),]
+    # Make a combination of [(value,suits),]
+    # Using nested loops makes its own list for th outer loop
+    # [
+    #   ["Ace of Spades", "Ace of Clubs", "Ace of Hearts", "Ace of Diamonds"],
+    #   ["Two of Spades", "Two of Clubs", "Two of Hearts", "Two of Diamonds"],
+    #   ["Three of Spades", "Three of Clubs", "Three of Hearts", "Three of Diamonds"],
+    #   ["Four of Spades", "Four of Clubs", "Four of Hearts", "Four of Diamonds"],
+    #   ["Five of Spades", "Five of Clubs", "Five of Hearts", "Five of Diamonds"]
+    # ]
 
-    for suit <- suits do
-      for value <- values do
-        value
+    for value <- values do
+      for suit <- suits do
+        "#{value} of #{suit}"
       end
     end
   end
