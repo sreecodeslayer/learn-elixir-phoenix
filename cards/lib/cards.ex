@@ -20,7 +20,7 @@ defmodule Cards do
     # for value <- values do
     #   for suit <- suits do
     #     "#{value} of #{suit}"
-    #   end
+    #   end 
     # end
     # Recursively pull out and flatten the list
 
@@ -43,5 +43,11 @@ defmodule Cards do
 
   def contains?(deck, card) do
     Enum.member?(deck, card)
+  end
+
+  def deal(deck, size) do
+    # Splits the deck and index 0 will have size count of elements
+    # Returns a tuple {[my hand], [the rest]}
+    Enum.split(deck, size)
   end
 end
