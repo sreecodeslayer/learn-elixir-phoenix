@@ -10,7 +10,9 @@ defmodule Cards do
     # Make a combination oof [(value,suits),]
 
     for suit <- suits do
-      suit
+      for value <- values do
+        value
+      end
     end
   end
 
