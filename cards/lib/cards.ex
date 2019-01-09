@@ -40,10 +40,19 @@ defmodule Cards do
     end
   end
 
+  @doc """
+  Shuffle a deck of cards
+  """
   def shuffle(deck) do
     Enum.shuffle(deck)
   end
 
+  @doc """
+  Check if a deck contains a specific card.  
+  This function takes in two arguments `deck`, and `card`.  
+  The `deck` argument requires the list of cards as in a deck of cards.  
+  The `card` argument takes the card to be checked for.
+  """
   def contains?(deck, card) do
     Enum.member?(deck, card)
   end
@@ -68,11 +77,32 @@ defmodule Cards do
     Enum.split(deck, size)
   end
 
+  @doc """
+  Save an existing deck into a binary file.
+  This function takes in two arguments `deck`, and `filename`.  
+  The `deck` argument requires the list of cards as in a deck of cards.  
+  The `filename` argument indicates complete path or filename to save the file as.
+
+  ## Example
+
+      iex> deck = Cards.create_deck
+      iex> Cards.save(deck,'newdeck.bin')
+
+  """
   def save(deck, filename) do
     bin = :erlang.term_to_binary(deck)
     File.write(filename, bin)
   end
 
+  @doc """
+  Load an existing deck from a binary file.
+  This function takes in an argument `filename`.  
+  The `filename` argument indicates complete path or filename to load the file from.
+
+  ## Example
+
+      iex> saveddeck = Cards.load('newdeck.bin')
+  """
   def load(filename) do
     case File.read(filename) do
       {:ok, file} -> :erlang.binary_to_term(file)
@@ -80,10 +110,19 @@ defmodule Cards do
     end
   end
 
+  @doc """
+  Create a hands of card from deck.
+  This function takes in an argument `handsize` of type `int`.  
+  The `handsize` argument indicates how many hands to shuffle and deal for the cards game.
+
+  ## Example
+
+      iex> {hand,remains} = Cards.create_hand(5)
+      iex> hand
+      ["Five of Diamonds", "Three of Diamonds", "Ace of Hearts", "Ace of Diamonds",
+      "Three of Clubs"]
+  """
   def create_hand(handsize) do
-    # deck = Cards.create_deck()
-    # deck = Cards.shuffle(deck)
-    # Cards.deal(deck, handsize)
     Cards.create_deck()
     |> Cards.shuffle()
     |> Cards.deal(handsize)
