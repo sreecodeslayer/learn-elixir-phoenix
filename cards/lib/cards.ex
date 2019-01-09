@@ -3,10 +3,9 @@ defmodule Cards do
   The Cards module provides a variety of functionalities dealing with a game of cards
   """
 
-  def hello do
-    "Hi user! Welcome to game of cards"
-  end
-
+  @doc """
+  Returns a list of strings representing a deck of cards
+  """
   def create_deck do
     values = ["Ace", "Two", "Three", "Four", "Five"]
     suits = ["Spades", "Clubs", "Hearts", "Diamonds"]
@@ -49,6 +48,20 @@ defmodule Cards do
     Enum.member?(deck, card)
   end
 
+  @doc """
+  Divides a deck into a hand and remainder deck.
+  This function takes in two arguments `deck`, and `size`.  
+  The `deck` argument requires the list of cards as in a deck of cards.  
+  The `size` argument indicates how many cards should go into the single hand.
+
+  ## Example
+
+      iex> deck = Cards.create_deck
+      iex> {hand,otherdeck} = Cards.deal(deck,1)
+      iex> hand
+      ["Ace of Spades"]
+
+  """
   def deal(deck, size) do
     # Splits the deck and index 0 will have size count of elements
     # Returns a tuple {[my hand], [the rest]}
