@@ -52,6 +52,12 @@ defmodule Cards do
   This function takes in two arguments `deck`, and `card`.  
   The `deck` argument requires the list of cards as in a deck of cards.  
   The `card` argument takes the card to be checked for.
+
+  ## Example
+
+      iex> deck = Cards.create_deck()
+      iex> Cards.contains?(deck,"Ace of Spades")
+      true
   """
   def contains?(deck, card) do
     Enum.member?(deck, card)
@@ -124,10 +130,15 @@ defmodule Cards do
 
   ## Example
 
-      iex> {hand,remains} = Cards.create_hand(5)
+      iex> {hand,remains} = Cards.create_hand(1)
       iex> hand
-      ["Five of Diamonds", "Three of Diamonds", "Ace of Hearts", "Ace of Diamonds",
-      "Three of Clubs"]
+      ["Two of Diamonds"]
+      iex> remains
+      ["Three of Hearts", "Four of Hearts", "Ace of Clubs", "Three of Spades",
+       "Ace of Hearts", "Five of Hearts", "Four of Spades", "Three of Clubs",
+       "Four of Clubs", "Ace of Diamonds", "Two of Clubs", "Three of Diamonds",
+       "Four of Diamonds", "Two of Hearts", "Five of Clubs", "Five of Spades",
+       "Five of Diamonds", "Two of Spades", "Ace of Spades"]
   """
   def create_hand(handsize) do
     Cards.create_deck()
