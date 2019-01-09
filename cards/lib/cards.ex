@@ -72,7 +72,7 @@ defmodule Cards do
   ## Example
 
       iex> deck = Cards.create_deck
-      iex> {hand,otherdeck} = Cards.deal(deck,1)
+      iex> {hand,_otherdeck} = Cards.deal(deck,1)
       iex> hand
       ["Ace of Spades"]
 
@@ -130,10 +130,10 @@ defmodule Cards do
 
   ## Example
 
-      iex> {hand,remains} = Cards.create_hand(1)
-      iex> hand
+      {hand,remains} = Cards.create_hand(1)
+      hand
       ["Two of Diamonds"]
-      iex> remains
+      remains
       ["Three of Hearts", "Four of Hearts", "Ace of Clubs", "Three of Spades",
        "Ace of Hearts", "Five of Hearts", "Four of Spades", "Three of Clubs",
        "Four of Clubs", "Ace of Diamonds", "Two of Clubs", "Three of Diamonds",
