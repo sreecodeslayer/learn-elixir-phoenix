@@ -1,6 +1,7 @@
 # Identicon
 
-**TODO: Add description**
+A 250x250 image with 5x5 random colored grid, and is mirroed along the vertical center axes.
+Something similar to what GitHub assigns to a new user with no profile photo
 
 ## Installation
 
