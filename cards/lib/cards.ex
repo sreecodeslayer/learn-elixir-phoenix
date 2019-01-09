@@ -1,4 +1,8 @@
 defmodule Cards do
+  @moduledoc """
+  The Cards module provides a variety of functionalities dealing with a game of cards
+  """
+
   def hello do
     "Hi user! Welcome to game of cards"
   end
