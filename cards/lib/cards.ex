@@ -50,4 +50,18 @@ defmodule Cards do
     # Returns a tuple {[my hand], [the rest]}
     Enum.split(deck, size)
   end
+
+  def save(deck, filename) do
+    bin = :erlang.term_to_binary(deck)
+    File.write(filename, bin)
+  end
+
+  def load(filename) do
+    {status, bin} = File.read(filename)
+
+    case status do
+      :ok -> :erlang.binary_to_term(bin)
+      :error -> "File not found"
+    end
+  end
 end
