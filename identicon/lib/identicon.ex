@@ -6,13 +6,27 @@ defmodule Identicon do
   def main(inp) do
     inp
     |> get_hash
+    |> pick_color
   end
 
   @doc """
   Get a hash value for an input string
   """
   def get_hash(input) do
-    :crypto.hash(:md5, input)
-    |> :binary.bin_to_list()
+    hex =
+      :crypto.hash(:md5, input)
+      |> :binary.bin_to_list()
+
+    %Identicon.Image{hex: hex}
+  end
+
+  @doc """
+  Pick an RGB list given a struct
+  """
+  def pick_color(img) do
+    # {rgblist, _junk} = Enum.split(img.hex, 3)
+    # rgblist
+    [r, g, b | _remain] = img.hex
+    [r, g, b]
   end
 end
