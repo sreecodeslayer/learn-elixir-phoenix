@@ -62,4 +62,10 @@ defmodule Cards do
       {:error, :enoent} -> "File not found"
     end
   end
+
+  def create_hand(handsize) do
+    deck = Cards.create_deck()
+    deck = Cards.shuffle(deck)
+    Cards.deal(deck, handsize)
+  end
 end
