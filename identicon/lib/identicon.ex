@@ -27,6 +27,7 @@ defmodule Identicon do
     # {rgblist, _junk} = Enum.split(img.hex, 3)
     # rgblist
     [r, g, b | _remain] = img.hex
-    [r, g, b]
+    # %Identicon.Image{hex: img.hex, rgb: [r, g, b]}
+    %Identicon.Image{img | rgb: [r, g, b]}
   end
 end
