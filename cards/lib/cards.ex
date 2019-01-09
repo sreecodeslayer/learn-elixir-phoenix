@@ -87,6 +87,7 @@ defmodule Cards do
 
       iex> deck = Cards.create_deck
       iex> Cards.save(deck,'newdeck.bin')
+      :ok
 
   """
   def save(deck, filename) do
@@ -102,6 +103,12 @@ defmodule Cards do
   ## Example
 
       iex> saveddeck = Cards.load('newdeck.bin')
+      iex> saveddeck
+      ["Ace of Spades", "Two of Spades", "Three of Spades", "Four of Spades",
+      "Five of Spades", "Ace of Clubs", "Two of Clubs", "Three of Clubs",
+      "Four of Clubs", "Five of Clubs", "Ace of Hearts", "Two of Hearts",
+      "Three of Hearts", "Four of Hearts", "Five of Hearts", "Ace of Diamonds",
+      "Two of Diamonds", "Three of Diamonds", "Four of Diamonds", "Five of Diamonds"]
   """
   def load(filename) do
     case File.read(filename) do
