@@ -38,7 +38,8 @@ defmodule Identicon do
   def build_grid(img) do
     img.hex
     |> Enum.chunk_every(3, 3, :discard)
-    |> mirror_row
+    # Pass a reference of mirror_row to enum's map
+    |> Enum.map(&mirror_row/1)
   end
 
   def mirror_row(current_row) do
