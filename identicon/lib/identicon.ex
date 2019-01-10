@@ -36,10 +36,16 @@ defmodule Identicon do
   Picks up the image struct, makes chunks of list for every 3 elements
   """
   def build_grid(img) do
-    img.hex
-    |> Enum.chunk_every(3, 3, :discard)
-    # Pass a reference of mirror_row to enum's map
-    |> Enum.map(&mirror_row/1)
+    grid =
+      img.hex
+      |> Enum.chunk_every(3, 3, :discard)
+      # Pass a reference of mirror_row to enum's map
+      |> Enum.map(&mirror_row/1)
+      # Flatten the list to make it less complex iteration
+      |> List.flatten()
+      |> Enum.with_index()
+
+    %Identicon.Image{img | grid: grid}
   end
 
   def mirror_row(current_row) do
