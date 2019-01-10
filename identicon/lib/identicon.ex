@@ -12,6 +12,8 @@ defmodule Identicon do
     |> build_grid
     |> filter_odd_sqrs
     |> build_pixelmap
+    |> draw
+    |> save(inp)
   end
 
   @doc """
@@ -73,14 +75,29 @@ defmodule Identicon do
     # to get y , we use div(index,5)*50
     pxl_map =
       Enum.map(img.grid, fn {_num, index} ->
-        horizontal = rem(index, 5) * 50
-        vertical = div(index, 5) * 50
+        horizontal = rem(index, 5) * 100
+        vertical = div(index, 5) * 100
 
         top_left = {horizontal, vertical}
-        bottom_right = {horizontal + 50, vertical + 50}
+        bottom_right = {horizontal + 100, vertical + 100}
         {top_left, bottom_right}
       end)
 
     %Identicon.Image{img | pixel_map: pxl_map}
+  end
+
+  def draw(%Identicon.Image{rgb: rgb, pixel_map: pixel_map}) do
+    image = :egd.create(500, 500)
+    filler = :egd.color(rgb)
+
+    Enum.each(pixel_map, fn {top_left, bottom_right} ->
+      :egd.filledRectangle(image, top_left, bottom_right, filler)
+    end)
+
+    :egd.render(image)
+  end
+
+  def save(img_obj, filename) do
+    File.write("#{filename}.png", img_obj)
   end
 end
