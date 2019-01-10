@@ -13,6 +13,8 @@ config :discuss,
 # Configures the endpoint
 config :discuss, DiscussWeb.Endpoint,
   url: [host: "localhost"],
+  debug_errors: true,
+  code_reloader: true,
   secret_key_base: "8GcbqehV7spXLFAc/TSOL67naYg2o/Ua73xVu76DvsnLU2d7ycSMZUlL+ZLwKgKh",
   render_errors: [view: DiscussWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Discuss.PubSub, adapter: Phoenix.PubSub.PG2]
