@@ -1,4 +1,6 @@
 defmodule Identicon do
+  import Integer
+
   @moduledoc """
   The one stop module for making an identicon from a piece of string.
   Create a unique image representation for every string that you may pass int.
@@ -8,6 +10,7 @@ defmodule Identicon do
     |> get_hash
     |> pick_color
     |> build_grid
+    |> filter_odd_sqrs
   end
 
   @doc """
@@ -54,5 +57,16 @@ defmodule Identicon do
 
     # returns as [145,46,200,46,145]
     current_row ++ [second, first]
+  end
+
+  def filter_odd_sqrs(img) do
+    grid =
+      img.grid
+      |> Enum.filter(fn {num, _index} -> Integer.is_even(num) end)
+
+    %Identicon.Image{img | grid: grid}
+  end
+
+  def add_shape do
   end
 end
