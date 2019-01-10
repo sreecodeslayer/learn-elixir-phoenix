@@ -71,5 +71,16 @@ defmodule Identicon do
   def build_pixelmap(img) do
     # to get x , we use rem(index,5)*50
     # to get y , we use div(index,5)*50
+    pxl_map =
+      Enum.map(img.grid, fn {_num, index} ->
+        horizontal = rem(index, 5) * 50
+        vertical = div(index, 5) * 50
+
+        top_left = {horizontal, vertical}
+        bottom_right = {horizontal + 50, vertical + 50}
+        {top_left, bottom_right}
+      end)
+
+    %Identicon.Image{img | pixel_map: pxl_map}
   end
 end
