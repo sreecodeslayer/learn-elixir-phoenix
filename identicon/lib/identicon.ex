@@ -11,6 +11,7 @@ defmodule Identicon do
     |> pick_color
     |> build_grid
     |> filter_odd_sqrs
+    |> build_pixelmap
   end
 
   @doc """
@@ -67,6 +68,8 @@ defmodule Identicon do
     %Identicon.Image{img | grid: grid}
   end
 
-  def add_shape do
+  def build_pixelmap(img) do
+    # to get x , we use rem(index,5)*50
+    # to get y , we use div(index,5)*50
   end
 end
