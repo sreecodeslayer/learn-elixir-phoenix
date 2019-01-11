@@ -1,12 +1,22 @@
 <h5>Topics</h5>
 <ul class="collection">
     <%= for topic <- @topics do %>
-    <li class="collection-item"><%= topic.title %></li>        
+    <li class="collection-item">
+        <%= topic.title %>
+        <div class="right">
+            <%= link to: Routes.topic_path(@conn, :edit, topic) do %>
+            <i class="material-icons amber-text">edit</i>
+            <% end %>
+            <%= link to: Routes.topic_path(@conn, :delete, topic), method: :delete do %>
+            <i class="material-icons red-text">delete</i>
+            <% end %>
+        </div>
+    </li>      
     <% end %>
 </ul>
 
 <div class="fixed-action-btn">
     <%= link to: Routes.topic_path(@conn, :new), class: "btn-floating btn-large waves-effect waves-light red" do %>
-        <i class="material-icons">add</i>
+    <i class="material-icons">add</i>
     <% end %>
 </div>
