@@ -4,3 +4,9 @@
     <li class="collection-item"><%= topic.title %></li>        
     <% end %>
 </ul>
+
+<div class="fixed-action-btn">
+    <%= link to: Routes.topic_path(@conn, :new), class: "btn-floating btn-large waves-effect waves-light red" do %>
+        <i class="material-icons">add</i>
+    <% end %>
+</div>
