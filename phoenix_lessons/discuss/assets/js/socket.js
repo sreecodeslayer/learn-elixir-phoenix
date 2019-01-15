@@ -6,9 +6,6 @@
 //
 // Pass the token on params as below. Or remove it
 // from the params if you are not using authentication.
-import { Socket } from 'phoenix'
-
-let socket = new Socket('/socket', { params: { token: window.userToken } })
 
 // When you connect, you'll often need to authenticate the client.
 // For example, imagine you have an authentication plug, `MyAuth`,
@@ -51,13 +48,17 @@ let socket = new Socket('/socket', { params: { token: window.userToken } })
 //       end
 //     end
 //
+import { Socket } from 'phoenix'
+
+let socket = new Socket('/socket', { params: { token: window.userToken } })
 // Finally, connect to the socket:
 socket.connect()
 
+const createSocket = (topicID) => {
 // Now that you are connected, you can join channels with a topic:
-let channel = socket.channel('comments:1', {})
-channel.join()
-  .receive('ok', resp => { console.log('Joined successfully', resp) })
-  .receive('error', resp => { console.log('Unable to join', resp) })
-
-export default socket
+  let channel = socket.channel(`comments:${topicID}`, {})
+  channel.join()
+    .receive('ok', resp => { console.log('Joined successfully', resp) })
+    .receive('error', resp => { console.log('Unable to join', resp) })
+}
+window.createSocket = createSocket
