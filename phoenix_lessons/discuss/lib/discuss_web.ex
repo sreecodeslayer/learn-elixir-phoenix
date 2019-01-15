@@ -25,6 +25,8 @@ defmodule DiscussWeb do
       import DiscussWeb.Gettext
       alias Discuss.Repo
       alias DiscussWeb.Router.Helpers, as: Routes
+      # For building associations in controller
+      import Ecto
     end
   end
 
