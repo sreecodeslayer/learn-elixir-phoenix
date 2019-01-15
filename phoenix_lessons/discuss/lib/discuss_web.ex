@@ -63,6 +63,8 @@ defmodule DiscussWeb do
       alias Discuss.Repo
       # For building associations in channel
       import Ecto
+      # For json encoder
+      import Jason
     end
   end
 
