@@ -1,10 +1,12 @@
 defmodule DiscussWeb.Plugs.SetUser do
+  # for assign on conn
   import Plug.Conn
+  # for session
   import Phoenix.Controller
-
-  alias DiscussWeb.Repo
+  # DB operations
+  alias Discuss.Repo
+  # User model
   alias DiscussWeb.User
-  alias DiscussWeb.Router.Helpers
 
   def init(_params) do
   end
