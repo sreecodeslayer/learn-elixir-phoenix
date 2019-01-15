@@ -1,27 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Discuss · Phoenix Framework</title>
-    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  </head>
-  <body>
-    <header>
-        <nav role="navigation" class="teal">
-          <div class="nav-wrapper container">
-            <a href="/" class="brand-logo">Discussions</a>
-          </div>
-        </nav>
-    </header>
-    <main role="main" class="container">
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-      <%= render @view_module, @view_template, assigns %>
-    </main>
-    <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
-  </body>
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Discuss · Phoenix Framework</title>
+  <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+<body>
+  <header>
+    <nav role="navigation" class="teal">
+      <div class="nav-wrapper container">
+        <a href="/" class="brand-logo">Discussions</a>
+        <ul class="right hide-on-med-and-down">
+          <%= if @conn.assigns[:user] do %>
+          <li><%= link "SignOut", to: Routes.auth_path(@conn, :signout) %></li>
+          <% else %>
+          <li><%= link "GitHub SignIn", to: Routes.auth_path(@conn, :request, "github") %></li>
+          <% end %>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <main role="main" class="container">
+    <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+    <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+    <%= render @view_module, @view_template, assigns %>
+  </main>
+  <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+</body>
 </html>
