@@ -2,6 +2,8 @@
 <div class="input-field">
     <textarea class="materialize-textarea"></textarea>
     <button class="btn btn-primary">Add comment</button>
+    <hr>
+    <ul class="collection" id="comments"></ul>
 </div>
 
 <script type="text/javascript">
