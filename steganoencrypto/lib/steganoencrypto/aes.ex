@@ -1,5 +1,5 @@
 defmodule Steganoencrypto.AES do
-  import ExCrypto
+  alias ExCrypto
 
   @doc """
   key + clear_text -> init_vec + cipher_text
@@ -9,7 +9,7 @@ defmodule Steganoencrypto.AES do
 
     case ExCrypto.encrypt(key, clear_text) do
       {:ok, {iv, cipher_text}} ->
-        {key, Base.encode64(iv) <> ":" <> Base.encode64(cipher_text)}
+        {Base.encode64(key), Base.encode64(iv) <> ":" <> Base.encode64(cipher_text)}
 
       {:error, _reason} ->
         ""
@@ -19,6 +19,7 @@ defmodule Steganoencrypto.AES do
   def decrypt(cipher_text, key) do
     [iv, cipher_text] = String.split(cipher_text, ":")
     iv = Base.decode64(iv)
+    key = Base.decode64(key)
     cipher_text = Base.decode64(cipher_text)
 
     case ExCrypto.decrypt(key, iv, cipher_text) do

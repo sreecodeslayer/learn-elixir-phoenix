@@ -15,14 +15,22 @@ defmodule Steganoencrypto do
 
   """
   def write(text, filepath) do
-    text
-    |> AES.encrypt()
-    |> Image.hide(filepath)
+    {key, cphtext} = AES.encrypt(text)
+
+    case Image.hide(cphtext, filepath) do
+      :ok -> IO.puts("Please save your encryption key securely:\n#{key}")
+    end
   end
 
-  def read(filepath) do
-    filepath
-    |> Image.unhide()
-    |> AES.decrypt()
+  def read(key, filepath) do
+    res =
+      filepath
+      |> Image.unhide()
+      |> AES.decrypt(key)
+
+    case res do
+      {:ok, clear_text} -> IO.puts("Here is secret message from image:\n#{clear_text}")
+      {:error, _} -> IO.puts("Oops, something unexpected happened!!")
+    end
   end
 end
