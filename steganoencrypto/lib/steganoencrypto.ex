@@ -1,18 +1,28 @@
 defmodule Steganoencrypto do
   @moduledoc """
-  Documentation for Steganoencrypto.
+  A simple cli tool that lets you hide any text inside a given image by using the concepts of AES encryption and Steganoencrypto.
   """
+  alias Steganoencrypto.AES
+  alias Steganoencrypto.Image
 
   @doc """
-  Hello world.
+  Single entry point for hiding an encrypted message in a given image.
 
   ## Examples
 
-      iex> Steganoencrypto.hello()
-      :world
+      Steganoencrypto.write('hide this message', '/path/to/image.png')
+      :ok
 
   """
-  def hello do
-    :world
+  def write(text, filepath) do
+    text
+    |> AES.encrypt()
+    |> Image.hide(filepath)
+  end
+
+  def read(filepath) do
+    filepath
+    |> Image.unhide()
+    |> AES.decrypt()
   end
 end
